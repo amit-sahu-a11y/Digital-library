@@ -2,7 +2,8 @@ from fastapi import APIRouter, UploadFile, File
 import os
 
 from app.services.pdf_service import extract_pdf_pages
-from app.chunking.chunk_service import chunk_text
+# from app.chunking.chunk_service import chunk_text
+from app.chunking.chunk_service import create_chunks
 
 router = APIRouter()
 
@@ -40,7 +41,7 @@ async def upload_pdf(file: UploadFile = File(...)):
 
         total_characters += len(page_text)
 
-        chunks = chunk_text(page_text)
+        chunks = create_chunks(page_text)
 
         for chunk in chunks:
             all_chunks.append({
