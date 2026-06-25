@@ -15,6 +15,16 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @router.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
+    if not file.filename.lower().endswith(".pdf"):
+        return {
+            "success": False,
+            "message": "Only PDF files are allowed."
+        }
+    if total_characters == 0:
+        return {
+        "success": False,
+        "message": "No readable text found in PDF."
+    }
     """
     Upload a PDF, extract pages, create chunks,
     and return chunk metadata.
@@ -56,6 +66,7 @@ async def upload_pdf(file: UploadFile = File(...)):
                 "chunk_index": chunk_id,
 
                 "char_count": len(chunk),
+                "word_count": len(chunk.split()),
 
                 "chunk_text": chunk
 
@@ -76,13 +87,4 @@ async def upload_pdf(file: UploadFile = File(...)):
 
         "preview_chunks": all_chunks[:5]
     }
-    if not file.filename.lower().endswith(".pdf"):
-        return {
-            "success": False,
-            "message": "Only PDF files are allowed."
-        }
-    if total_characters == 0:
-        return {
-        "success": False,
-        "message": "No readable text found in PDF."
-    }
+    
