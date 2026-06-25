@@ -20,11 +20,7 @@ async def upload_pdf(file: UploadFile = File(...)):
             "success": False,
             "message": "Only PDF files are allowed."
         }
-    if total_characters == 0:
-        return {
-        "success": False,
-        "message": "No readable text found in PDF."
-    }
+    
     """
     Upload a PDF, extract pages, create chunks,
     and return chunk metadata.
