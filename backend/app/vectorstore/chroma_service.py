@@ -26,12 +26,15 @@ def store_chunks(chunks, embeddings):
         vectors.append(embedding)
 
         metadatas.append({
+            "document_id": chunk["document_id"],
 
             "book_name": chunk["book_name"],
 
             "page_number": chunk["page_number"],
 
-            "chunk_id": chunk["chunk_id"]
+            "chunk_id": chunk["chunk_id"],
+            
+            "chunk_index": chunk["chunk_index"]
         })
 
     collection.add(

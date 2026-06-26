@@ -31,6 +31,7 @@ class DocumentProcessor:
             for chunk in chunks:
 
                 all_chunks.append({
+                    "document_id": document_id, 
 
                     "book_id": 1,
 
