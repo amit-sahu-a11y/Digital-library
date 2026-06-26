@@ -2,7 +2,9 @@ from app.services.pdf_service import extract_pdf_pages
 from app.chunking.chunk_service import create_chunks
 from app.embeddings.embedding_service import generate_embeddings
 from app.vectorstore.chroma_service import store_chunks
+import uuid
 
+document_id = str(uuid.uuid4())
 
 class DocumentProcessor:
 
@@ -55,9 +57,11 @@ class DocumentProcessor:
 
         return {
 
+            # return {
             "success": True,
 
             "filename": file_name,
+            "document_id": document_id,
 
             "total_pages": len(pages),
 
@@ -65,7 +69,10 @@ class DocumentProcessor:
 
             "total_chunks": len(all_chunks),
 
-            "preview_chunks": all_chunks[:5],
+            "vector_database": "ChromaDB",
 
-            "status": "Stored successfully in ChromaDB"
-        }
+            "embedding_model": "all-MiniLM-L6-v2",
+
+            "status": "Document indexed successfully"
+}
+        # }
