@@ -3,6 +3,9 @@ from app.chunking.chunk_service import create_chunks
 from app.embeddings.embedding_service import generate_embeddings
 from app.vectorstore.chroma_service import store_chunks
 import uuid
+import time
+
+start_time = time.time()
 
 document_id = str(uuid.uuid4())
 
@@ -54,7 +57,7 @@ class DocumentProcessor:
         embeddings = generate_embeddings(texts)
 
         store_chunks(all_chunks, embeddings)
-
+        processing_time = round(time.time() - start_time, 2)
         return {
 
             # return {
@@ -68,6 +71,7 @@ class DocumentProcessor:
             "total_characters": total_characters,
 
             "total_chunks": len(all_chunks),
+            "processing_time_seconds": processing_time,
 
             "vector_database": "ChromaDB",
 
