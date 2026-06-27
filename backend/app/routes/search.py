@@ -1,13 +1,18 @@
 from fastapi import APIRouter
 
+from app.services.search_service import SearchService
+
 router = APIRouter(
     prefix="/search",
     tags=["Search"]
 )
 
-@router.get("/")
-def test_search():
+search_service = SearchService()
 
-    return {
-        "message": "Search API is working!"
-    }
+
+@router.get("/")
+def search(query: str):
+
+    results = search_service.search(query)
+
+    return results
