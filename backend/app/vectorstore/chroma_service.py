@@ -53,14 +53,18 @@ def search(query_embedding, top_k=5):
 
     return results    
 
-def search_chunks(query_embedding, top_k=5):
-    """
-    Search the most similar chunks from ChromaDB.
-    """
+def search_chunks(query_embedding, top_k=5, document_id=None):
 
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=top_k
-    )
+    if document_id:
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=top_k,
+            where={"document_id": document_id}
+        )
+    else:
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=top_k
+        )
 
     return results
