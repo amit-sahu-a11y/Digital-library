@@ -26,21 +26,24 @@ class SearchService:
 
         for doc, meta, distance in zip(documents, metadatas, distances):
 
+            # Convert distance to similarity score
             score = round((1 - distance) * 100, 2)
+            score = max(0, min(100, score))
 
             formatted_results.append({
 
-                "book_name": meta["book_name"],
+                "book_name": meta.get("book_name"),
 
-                "document_id": meta["document_id"],
+                "document_id": meta.get("document_id"),
 
-                "page_number": meta["page_number"],
+                "page_number": meta.get("page_number"),
 
-                "chunk_id": meta["chunk_id"],
+                "chunk_id": meta.get("chunk_id"),
 
                 "score": score,
 
-                "text": doc
+                # Return only a preview instead of the entire chunk
+                "text": doc[:350] + "..." if len(doc) > 350 else doc
 
             })
 
@@ -49,6 +52,8 @@ class SearchService:
         return {
 
             "query": query,
+
+            "document_id": document_id,
 
             "total_results": len(formatted_results),
 
