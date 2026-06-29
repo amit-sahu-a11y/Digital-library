@@ -65,20 +65,31 @@ class SearchService:
 
         search_time = round((time.time() - start_time) * 1000, 2)
 
-        return {
+        if len(formatted_results) == 0:
+            return {
+                "query": query,
+                "answer": "I couldn't find relevant information in the uploaded documents.",
+                "document_id": document_id,
+                "total_results": 0,
+                "search_time_ms": search_time,
+                "generation_time_ms": 0,
+                "sources": []
+            }
+        else:
+            return {
 
-            "query": query,
+                "query": query,
 
-            "answer": answer,
+                "answer": answer,
 
-            "document_id": document_id,
+                "document_id": document_id,
 
-            "total_results": len(formatted_results),
+                "total_results": len(formatted_results),
 
-            "search_time_ms": search_time,
+                "search_time_ms": search_time,
 
-            "generation_time_ms": generation_time,
+                "generation_time_ms": generation_time,
 
-            "sources": formatted_results
+                "sources": formatted_results
 
         }
