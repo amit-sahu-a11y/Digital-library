@@ -53,18 +53,13 @@ class SearchService:
 
             formatted_results.append({
 
-                "book_name": meta.get("book_name"),
+                "book_name": meta["book_name"],
 
-                "document_id": meta.get("document_id"),
+                "document_id": meta["document_id"],
 
-                "page_number": meta.get("page_number"),
+                "page_number": meta["page_number"],
 
-                "chunk_id": meta.get("chunk_id"),
-
-                "score": score,
-
-                # Return only a preview instead of the entire chunk
-                "text": doc[:350] + "..." if len(doc) > 350 else doc
+                "score": score
 
             })
 
@@ -84,6 +79,6 @@ class SearchService:
 
             "generation_time_ms": generation_time,
 
-            "results": formatted_results
+            "sources": formatted_results
 
         }
