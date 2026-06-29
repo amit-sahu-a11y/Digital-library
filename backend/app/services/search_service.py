@@ -3,6 +3,15 @@ import time
 from app.embeddings.embedding_service import generate_query_embedding
 from app.vectorstore.chroma_service import search_chunks
 
+import time
+
+# from app.embeddings.embedding_service import generate_query_embedding
+# from app.vectorstore.chroma_service import search_chunks
+from app.services.generation_service import GenerationService
+
+
+generator = GenerationService()
+
 
 class SearchService:
 
@@ -23,6 +32,18 @@ class SearchService:
         documents = results["documents"][0]
         metadatas = results["metadatas"][0]
         distances = results["distances"][0]
+        context = "\n\n".join(documents)
+        generation_start = time.time()
+
+        answer = generator.generate_answer(
+        query=query,
+        context=context
+        )
+
+        generation_time = round(
+            (time.time() - generation_start) * 1000,
+            2
+            )
 
         for doc, meta, distance in zip(documents, metadatas, distances):
 
@@ -53,11 +74,15 @@ class SearchService:
 
             "query": query,
 
+            "answer": answer,
+
             "document_id": document_id,
 
             "total_results": len(formatted_results),
 
             "search_time_ms": search_time,
+
+            "generation_time_ms": generation_time,
 
             "results": formatted_results
 
