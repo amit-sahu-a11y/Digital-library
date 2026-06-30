@@ -56,5 +56,21 @@ def search_chunks(query_embedding, top_k=5, document_id=None):
         }
 
     results = collection.query(**query_args)
+    
 
     return results
+
+def show_all_books():
+    data = collection.get()
+
+    print("\n========== BOOKS IN CHROMADB ==========\n")
+
+    books = set()
+
+    for meta in data["metadatas"]:
+        books.add(meta["book_name"])
+
+    for book in books:
+        print(book)
+
+    print("\n=======================================\n")
