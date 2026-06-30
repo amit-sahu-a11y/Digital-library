@@ -74,3 +74,12 @@ def show_all_books():
         print(book)
 
     print("\n=======================================\n")
+
+def search_raw(query_embedding):
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=10,
+        include=["documents", "distances", "metadatas"]
+    )
+
+    return results
