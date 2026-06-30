@@ -12,23 +12,22 @@ class GenerationService:
     def generate_answer(self, query, context):
 
         prompt = f"""
-You are an AI Academic Assistant.
+You are an AI tutor.
 
-Answer ONLY using the provided context.
+Use ONLY the information provided in the context.
 
-If the answer is not present in the context, reply exactly:
+Rules:
+1. If the answer is not present in the context, reply:
+   "I couldn't find this information in the uploaded documents."
+2. Explain the answer clearly.
+3. Use short paragraphs.
+4. Do not invent information.
+5. Do not mention the context.
 
-"I couldn't find this information in the uploaded documents."
-
--------------------------
 Context:
-
 {context}
 
--------------------------
-
 Question:
-
 {query}
 
 Answer:
