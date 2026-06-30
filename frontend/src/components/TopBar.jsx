@@ -3,13 +3,13 @@ const TopBar = () => {
     <header className="topbar">
 
       <div className="logo">
-        ScholarSync AI
+        📚 ScholarSync AI
       </div>
 
       <div className="user">
 
         <img
-          src="https://i.pravatar.cc/100"
+          src="https://i.pravatar.cc/100?img=13"
           alt="user"
         />
 

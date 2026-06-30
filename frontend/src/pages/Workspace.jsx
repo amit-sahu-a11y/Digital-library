@@ -1,11 +1,11 @@
 import TopBar from "../components/TopBar";
 import DocumentSidebar from "../components/DocumentSidebar";
 import ChatArea from "../components/ChatArea";
-import SourcePanel from "../components/SourcePanel";
+import EmptyWorkspace from "../components/EmptyWorkspace";
 
 const Workspace = () => {
   return (
-    <div className="workspace">
+    <div className="workspace-page">
 
       <TopBar />
 
@@ -13,9 +13,12 @@ const Workspace = () => {
 
         <DocumentSidebar />
 
-        <ChatArea />
+        <div className="workspace-center">
+          <EmptyWorkspace />
+          {/* Later this becomes ChatArea */}
+        </div>
 
-        <SourcePanel />
+        <ChatArea />
 
       </div>
 
