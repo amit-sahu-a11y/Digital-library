@@ -1,26 +1,19 @@
 const ChatArea = () => {
   return (
-    <aside className="sources-panel">
-
-      <h2>Sources</h2>
-
-      <div className="source-card">
-
-        <h4>Machine Learning.pdf</h4>
-
-        <p>Page 27</p>
-
-      </div>
-
-      <div className="source-card">
-
-        <h4>Machine Learning.pdf</h4>
-
-        <p>Page 45</p>
-
-      </div>
-
-    </aside>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        color: "white",
+        fontSize: "32px",
+        fontWeight: "bold",
+      }}
+    >
+      💬 AI Chat Ready
+    </div>
   );
 };
 

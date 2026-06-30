@@ -1,34 +1,48 @@
-import { FiFolder, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 
-const DocumentSidebar = () => {
-  return (
-    <aside className="document-sidebar">
+const DocumentSidebar = ({ documents }) => {
 
-      <div className="sidebar-header">
+    return (
 
-        <h2>Documents</h2>
+        <aside className="document-sidebar">
 
-        <button>
-          <FiPlus />
-        </button>
+            <div className="sidebar-header">
 
-      </div>
+                <h2>Documents</h2>
 
-      <div className="document-list">
+                <button>
 
-        <div className="document-card active">
-          📘 Machine Learning.pdf
-        </div>
+                    <FiPlus />
 
-        <div className="document-card">
-          +
-          Upload New PDF
-        </div>
+                </button>
 
-      </div>
+            </div>
 
-    </aside>
-  );
+            <div className="document-list">
+
+                {
+
+                    documents.map((doc, index) => (
+
+                        <div
+                            key={index}
+                            className="document-card active"
+                        >
+
+                            📘 {doc.filename}
+
+                        </div>
+
+                    ))
+
+                }
+
+            </div>
+
+        </aside>
+
+    );
+
 };
 
 export default DocumentSidebar;

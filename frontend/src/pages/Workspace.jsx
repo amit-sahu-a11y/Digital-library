@@ -1,29 +1,51 @@
+import { useState } from "react";
+
 import TopBar from "../components/TopBar";
 import DocumentSidebar from "../components/DocumentSidebar";
-import ChatArea from "../components/ChatArea";
 import EmptyWorkspace from "../components/EmptyWorkspace";
+import ChatArea from "../components/ChatArea";
+import SourcePanel from "../components/SourcePanel";
 
 const Workspace = () => {
-  return (
-    <div className="workspace-page">
 
-      <TopBar />
+    const [documents, setDocuments] = useState([]);
 
-      <div className="workspace-body">
+    return (
 
-        <DocumentSidebar />
+        <div className="workspace-page">
 
-        <div className="workspace-center">
-          <EmptyWorkspace />
-          {/* Later this becomes ChatArea */}
+            <TopBar />
+
+            <div className="workspace-body">
+
+                <DocumentSidebar
+                    documents={documents}
+                />
+
+                <div className="workspace-center">
+
+                    {documents.length === 0 ? (
+
+                        <EmptyWorkspace
+                            setDocuments={setDocuments}
+                        />
+
+                    ) : (
+
+                        <ChatArea />
+
+                    )}
+
+                </div>
+
+                <SourcePanel />
+
+            </div>
+
         </div>
 
-        <ChatArea />
+    );
 
-      </div>
-
-    </div>
-  );
 };
 
 export default Workspace;

@@ -1,7 +1,8 @@
 import UploadZone from "./UploadZone";
 import { motion } from "framer-motion";
 
-const EmptyWorkspace = () => {
+// const EmptyWorkspace = () => {
+const EmptyWorkspace = ({ setDocuments }) => {
   return (
     <div className="empty-workspace">
 
@@ -20,7 +21,9 @@ const EmptyWorkspace = () => {
           accurate answers with page references in seconds.
         </p>
 
-        <UploadZone />
+        <UploadZone
+    setDocuments={setDocuments}
+/>
 
       </motion.div>
 
