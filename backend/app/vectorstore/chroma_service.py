@@ -3,7 +3,10 @@ import chromadb
 client = chromadb.PersistentClient(path="chroma_db")
 
 collection = client.get_or_create_collection(
-    name="ebooks"
+    name="ebooks",
+    metadata={
+        "hnsw:space": "cosine"
+    }
 )
 
 
@@ -55,12 +58,11 @@ def search_chunks(query_embedding, top_k=5, document_id=None):
             "document_id": document_id
         }
 
-    results = collection.query(**query_args)
-    
+    return collection.query(**query_args)
 
-    return results
 
 def show_all_books():
+
     data = collection.get()
 
     print("\n========== BOOKS IN CHROMADB ==========\n")
@@ -75,11 +77,15 @@ def show_all_books():
 
     print("\n=======================================\n")
 
+
 def search_raw(query_embedding):
-    results = collection.query(
+
+    return collection.query(
         query_embeddings=[query_embedding],
         n_results=10,
-        include=["documents", "distances", "metadatas"]
+        include=[
+            "documents",
+            "distances",
+            "metadatas"
+        ]
     )
-
-    return results
