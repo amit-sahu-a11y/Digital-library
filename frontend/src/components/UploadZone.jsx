@@ -24,14 +24,16 @@ const UploadZone = ({ setDocuments }) => {
             setLoading(true);
 
             const response = await uploadPDF(file);
+            console.log(response);
 
             // Add uploaded document to sidebar
-            setDocuments((prev) => [
-                ...prev,
-                response
-            ]);
+            setDocuments((prev) => {
+            const updated = [...prev, response];
+            console.log("Documents:", updated);
+            return updated;
+            });
 
-            console.log(response);
+            // console.log(response);
 
             alert("✅ PDF uploaded successfully!");
 

@@ -9,6 +9,9 @@ import SourcePanel from "../components/SourcePanel";
 const Workspace = () => {
 
     const [documents, setDocuments] = useState([]);
+    const [messages, setMessages] = useState([]);
+    const [sources, setSources] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     return (
 
@@ -32,13 +35,21 @@ const Workspace = () => {
 
                     ) : (
 
-                        <ChatArea />
+                        <ChatArea
+                            messages={messages}
+                            setMessages={setMessages}
+                            setSources={setSources}
+                            loading={loading}
+                            setLoading={setLoading}
+                        />
 
                     )}
 
                 </div>
 
-                <SourcePanel />
+                <SourcePanel
+                    sources={sources}
+                />
 
             </div>
 
